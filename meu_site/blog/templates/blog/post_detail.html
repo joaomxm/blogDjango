@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}BLog - Detalhe{% endblock title %}
+
+{% block content %}
+    
+        <div class="post-entry">
+            <h2>{{ object.titulo }} </h1>
+            <p>{{ object.conteudo }}</p>
+        </div>
+     <a href="{{ object.get_absolute_url_update }}">+ Editar Postagem do Blog </a><br>
+     <a href="{{ object.get_absolute_url_delete }}"> Deletar Postagem do Blog </a>
+
+{% endblock content %}
