@@ -1,14 +1,29 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
+
+
+
+
 
 {% block title %}Login{% endblock title %}
 
 {% block content %}
-    
-   <h2>Login do sistema</h2>
-   <form method='POST'>
-       {% csrf_token %}
+  
+<div class="container" style="dipslay:flex" >
 
-       {{form.as_p}}
-       <button type="submit">Login</button>
-   </form>
+    <div class="card">
+    <div class="card-header">
+        <h2>Login do sistema</h2>
+    </div>
+    <div class="card-body">
+        <form method='POST'>
+        {% csrf_token %}
+            {{ form|bootstrap }}
+        
+        <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    </div>
+</div>
+
 {% endblock content %}

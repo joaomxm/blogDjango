@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 django = "*"
+django-bootstrap-form = "*"
+pillow = "*"
+django-ckeditor = "*"
 
 [requires]
 python_version = "3.8"

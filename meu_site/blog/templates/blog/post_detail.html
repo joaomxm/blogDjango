@@ -6,7 +6,7 @@
     
         <div class="post-entry">
             <h2>{{ object.titulo }} </h1>
-            <p>{{ object.conteudo }}</p>
+            <p>{{ object.conteudo|safe }}</p>
         </div>
      <a href="{{ object.get_absolute_url_update }}">+ Editar Postagem do Blog </a><br>
      <a href="{{ object.get_absolute_url_delete }}"> Deletar Postagem do Blog </a>

@@ -5,11 +5,25 @@
 {% block content %}
 
     {% for post in object_list %}
-        <div class="post-entry">
-    
-            <h2><a href="{{ post.get_absolute_url }}">{{ post.titulo }}</h1></a>
-            <p>{{ post.conteudo }}</p>
+        <div class="post-preview">
+             <a href="{{ post.get_absolute_url }}">
+            <h2 class="post-title">
+              {{ post.titulo }}
+            </h2>
+            <h3 class="post-subtitle">
+              {{ post.conteudo|safe|truncatechars:"100" }}
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on July 8, 2019</p>
         </div>
+        <hr>
     {% endfor %}
 
+    <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div> 
+
 {% endblock content %}
+

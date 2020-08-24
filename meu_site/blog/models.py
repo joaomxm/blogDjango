@@ -6,12 +6,28 @@ from django.utils.text import slugify
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from ckeditor.fields import RichTextField
+
 class PublishedManager(models.Manager):
 
     def get_queryset(self):
         return super(PublishedManager,self).get_queryset()\
                                            .filter(status='publicado')
 
+
+class Category(models.Model):
+    nome = models.CharField(max_length=100)
+    publicado = models.DateTimeField(default=timezone.now)
+    criado = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Categoria"
+        verbose_name_plural = 'Categorias'
+        ordering = ('-criado',)
+    
+
+    def __str__(self):
+        return self.nome
 
 
 class Post(models.Model):
@@ -20,11 +36,12 @@ class Post(models.Model):
         ('publicado','Publicado')
     )
 
-    titulo = models.CharField( max_length=250)
+    titulo = models.CharField(verbose_name="Título",max_length=250)
     slug = models.SlugField(max_length=250) #http://site.com/noticias/campeonato-brasileiro-2020/01/02/2020
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    conteudo = models.TextField()
+    categoria = models.ManyToManyField(Category,related_name="get_posts")
+    imagem = models.ImageField(upload_to='blog',blank=True, null= True)
+    conteudo = RichTextField(verbose_name="Conteúdo")
     publicado = models.DateTimeField(default=timezone.now)
     criado = models.DateField(auto_now_add=True)
     alterado = models.DateField( auto_now=True)
